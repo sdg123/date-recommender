@@ -13,9 +13,9 @@ export default {
   },
   mounted () {
   axios
-    .get(`http://www.omdbapi.com/?s=mummy&apikey=${process.env.VUE_APP_OMDB_API_KEY}&page=1&type=movie&Content-Type=application/json`)
+    .get(`https://api.trello.com/1/boards/ZLBNOfCb?key=${process.env.VUE_APP_TRELLO_API_KEY}&token=${process.env.VUE_APP_TRELLO_TOKEN}`)
     .then(response => {
-      this.wholeResponse = response.data.Search
+      this.wholeResponse = response.data
     })
     // .catch(error => {
     //   console.log(error)
