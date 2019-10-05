@@ -1,7 +1,19 @@
 <template>
-  <div class="hello">
-    {{wholeResponse}}
-  </div>
+  <b-container>
+      <div class="hello">
+        <h1>Date Recommender</h1>
+        <b-button variant="primary" class="mb-2">Random date idea</b-button>
+        <div v-for="(item, i) in wholeResponse" v-bind:key="i">
+          <b-row>
+            <b-col>
+              <b-card>
+                {{item.name}}
+              </b-card>
+            </b-col>
+          </b-row>
+        </div>
+      </div>
+  </b-container>
 </template>
 
 <script>
@@ -9,13 +21,13 @@ import axios from 'axios'
 export default {
   name: 'HelloWorld',
   props: {
-    wholeResponse: String
+    wholeResponse: Array
   },
   mounted () {
   axios
-    .get(`https://api.trello.com/1/boards/ZLBNOfCb?key=${process.env.VUE_APP_TRELLO_API_KEY}&token=${process.env.VUE_APP_TRELLO_TOKEN}`)
+    .get(`https://api.trello.com/1/boards/fDjwsM96/cards/?limit=10&fields=name&key=${process.env.VUE_APP_TRELLO_API_KEY}&token=${process.env.VUE_APP_TRELLO_TOKEN}`)
     .then(response => {
-      this.wholeResponse = response.data
+      this.wholeResponse = response.data;
     })
     // .catch(error => {
     //   console.log(error)
