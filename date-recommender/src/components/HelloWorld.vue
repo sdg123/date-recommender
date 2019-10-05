@@ -2,8 +2,9 @@
   <b-container>
       <div class="hello">
         <h1>Date Recommender</h1>
-        <b-button variant="primary" class="mb-2">Random date idea</b-button>
-        <div v-for="(item, i) in wholeResponse" v-bind:key="i">
+        <b-button v-on:click="randomize()" variant="primary" class="mb-2">Random date idea</b-button>
+        {{randomDate.name}}
+        <!-- <div v-for="(item, i) in wholeResponse" v-bind:key="i">
           <b-row>
             <b-col>
               <b-card>
@@ -11,7 +12,7 @@
               </b-card>
             </b-col>
           </b-row>
-        </div>
+        </div> -->
       </div>
   </b-container>
 </template>
@@ -21,7 +22,13 @@ import axios from 'axios'
 export default {
   name: 'HelloWorld',
   props: {
-    wholeResponse: Array
+    wholeResponse: Array,
+    randomDate: Object
+  },
+  methods: {
+    randomize: function() {
+      this.randomDate = this.wholeResponse[Math.floor(Math.random()*this.wholeResponse.length)]
+    }
   },
   mounted () {
   axios
