@@ -1,18 +1,25 @@
 <template>
   <b-container>
       <div class="hello">
-        <h1>Date Recommender</h1>
-        <b-button v-on:click="randomize()" variant="primary" class="mb-2">Random date idea</b-button>
-        {{randomDate.name}}
-        <!-- <div v-for="(item, i) in wholeResponse" v-bind:key="i">
-          <b-row>
-            <b-col>
-              <b-card>
-                {{item.name}}
-              </b-card>
-            </b-col>
-          </b-row>
-        </div> -->
+        <b-row>
+          <b-col>
+            <h1>Date Recommender</h1>
+          </b-col>
+        </b-row>
+        <b-row>
+          <b-col>
+            <b-button v-on:click="randomize()" pill variant="outline-primary" class="mb-2">I'm feeling lucky!</b-button>
+          </b-col>
+        </b-row>
+        <b-row>
+          <b-col cols="4"></b-col>
+          <b-col cols="4">
+            <b-card>
+              {{randomDate}}
+            </b-card>
+          </b-col>
+          <b-col cols="4"></b-col>
+        </b-row>
       </div>
   </b-container>
 </template>
@@ -27,7 +34,7 @@ export default {
   },
   methods: {
     randomize: function() {
-      this.randomDate = this.wholeResponse[Math.floor(Math.random()*this.wholeResponse.length)]
+      this.randomDate = this.wholeResponse[Math.floor(Math.random()*this.wholeResponse.length)].name
     }
   },
   mounted () {
@@ -35,6 +42,7 @@ export default {
     .get(`https://api.trello.com/1/boards/fDjwsM96/cards/?limit=10&fields=name&key=${process.env.VUE_APP_TRELLO_API_KEY}&token=${process.env.VUE_APP_TRELLO_TOKEN}`)
     .then(response => {
       this.wholeResponse = response.data;
+      this.randomDate = response.data[0].name;
     })
     // .catch(error => {
     //   console.log(error)
