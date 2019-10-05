@@ -15,7 +15,16 @@
           <b-col cols="4"></b-col>
           <b-col cols="4">
             <b-card>
-              {{randomDate}}
+              {{randomTrelloDate}}
+            </b-card>
+          </b-col>
+          <b-col cols="4"></b-col>
+        </b-row>
+        <b-row v-for="yelpItem in yelpResponse" :key="yelpItem">
+          <b-col cols="4"></b-col>
+          <b-col cols="4">
+            <b-card>
+              {{yelpItem.name}} | <strong>{{yelpItem.rating}}</strong>
             </b-card>
           </b-col>
           <b-col cols="4"></b-col>
@@ -29,24 +38,30 @@ import axios from 'axios'
 export default {
   name: 'HelloWorld',
   props: {
-    wholeResponse: Array,
-    randomDate: Object
+    trelloResponse: Array,
+    randomTrelloDate: Object,
+    yelpResponse: Array,
+    firstYelpDate: Object
   },
   methods: {
     randomize: function() {
-      this.randomDate = this.wholeResponse[Math.floor(Math.random()*this.wholeResponse.length)].name
+      this.randomTrelloDate = this.trelloResponse[Math.floor(Math.random()*this.trelloResponse.length)].name
     }
   },
   mounted () {
   axios
     .get(`https://api.trello.com/1/boards/fDjwsM96/cards/?limit=10&fields=name&key=${process.env.VUE_APP_TRELLO_API_KEY}&token=${process.env.VUE_APP_TRELLO_TOKEN}`)
     .then(response => {
-      this.wholeResponse = response.data;
-      this.randomDate = response.data[0].name;
+      this.trelloResponse = response.data;
+      this.randomTrelloDate = response.data[0].name;
     })
-    // .catch(error => {
-    //   console.log(error)
-    // })
+
+    axios
+    .get(`${'https://cors-anywhere.herokuapp.com/'}https://api.yelp.com/v3/businesses/search?limit=2&location=Winston Salem`, {headers: {'Authorization': `Bearer ${process.env.VUE_APP_YELP_API_KEY}`}})
+    .then(response => {
+      this.yelpResponse = response.data.businesses;
+      // this.firstYelpDate = response.data[0];
+    })
   }
 }
 </script>
