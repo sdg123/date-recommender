@@ -8,26 +8,23 @@
         </b-row>
         <b-row>
           <b-col>
-            <b-button v-on:click="randomize()" pill variant="outline-primary" class="mb-2">I'm feeling lucky!</b-button>
+            <b-button v-on:click="getRandomTrelloDate()" pill variant="outline-primary" class="mb-2">We're feeling lucky!</b-button>
+          </b-col>
+          <b-col>
+            <b-button v-on:click="getRandomYelpDate()" pill variant="outline-secondary" class="mb-2">Feed us!</b-button>
           </b-col>
         </b-row>
         <b-row>
-          <b-col cols="4"></b-col>
-          <b-col cols="4">
+          <b-col cols="6">
             <b-card>
               {{randomTrelloDate}}
             </b-card>
           </b-col>
-          <b-col cols="4"></b-col>
-        </b-row>
-        <b-row v-for="yelpItem in yelpResponse" :key="yelpItem">
-          <b-col cols="4"></b-col>
-          <b-col cols="4">
+          <b-col cols="6">
             <b-card>
-              {{yelpItem.name}} | <strong>{{yelpItem.rating}}</strong>
+              {{randomYelpDate}}
             </b-card>
           </b-col>
-          <b-col cols="4"></b-col>
         </b-row>
       </div>
   </b-container>
@@ -41,11 +38,14 @@ export default {
     trelloResponse: Array,
     randomTrelloDate: Object,
     yelpResponse: Array,
-    firstYelpDate: Object
+    randomYelpDate: Object
   },
   methods: {
-    randomize: function() {
+    getRandomTrelloDate: function() {
       this.randomTrelloDate = this.trelloResponse[Math.floor(Math.random()*this.trelloResponse.length)].name
+    },
+    getRandomYelpDate: function() {
+      this.randomYelpDate = this.yelpResponse[Math.floor(Math.random()*this.yelpResponse.length)].name
     }
   },
   mounted () {
@@ -57,10 +57,10 @@ export default {
     })
 
     axios
-    .get(`${'https://cors-anywhere.herokuapp.com/'}https://api.yelp.com/v3/businesses/search?limit=2&location=Winston Salem`, {headers: {'Authorization': `Bearer ${process.env.VUE_APP_YELP_API_KEY}`}})
+    .get(`${'https://cors-anywhere.herokuapp.com/'}https://api.yelp.com/v3/businesses/search?limit=5&location=Winston Salem`, {headers: {'Authorization': `Bearer ${process.env.VUE_APP_YELP_API_KEY}`}})
     .then(response => {
       this.yelpResponse = response.data.businesses;
-      // this.firstYelpDate = response.data[0];
+      this.randomYelpDate = this.yelpResponse[0].name;
     })
   }
 }
