@@ -8,10 +8,10 @@
         </b-row>
         <b-row>
           <b-col>
-            <b-button v-on:click="getRandomTrelloDate()" pill variant="outline-primary" class="mb-2">We're feeling lucky!</b-button>
+            <b-button v-on:click="getRandomTrelloDate()" pill variant="outline-primary" class="mb-2">Existing planned date idea</b-button>
           </b-col>
           <b-col>
-            <b-button v-on:click="getRandomYelpDate()" pill variant="outline-secondary" class="mb-2">Feed us!</b-button>
+            <b-button v-on:click="getRandomYelpDate()" pill variant="outline-secondary" class="mb-2">Hungry</b-button>
           </b-col>
         </b-row>
         <b-row>
