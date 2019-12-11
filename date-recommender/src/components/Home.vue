@@ -22,6 +22,14 @@
           </b-col>
           <b-col cols="6">
             <b-card>
+              {{randomYelpDate.name}}
+              <img :src="randomYelpDateImage" height="80px" width="80px" />
+              {{randomYelpDate.price}}
+            </b-card>
+            <b-card>
+              <!-- <span v-for="i in randomYelpDate.rating" :key="i"> &#11088;</span> -->
+            </b-card>
+            <b-card>
               {{randomYelpDate}}
             </b-card>
           </b-col>
@@ -39,14 +47,16 @@ export default {
     trelloResponse: Array,
     randomTrelloDate: Object,
     yelpResponse: Array,
-    randomYelpDate: Object
+    randomYelpDate: Object,
+    randomYelpDateImage: Object
   },
   methods: {
     getRandomTrelloDate: function() {
       this.randomTrelloDate = this.trelloResponse[Math.floor(Math.random()*this.trelloResponse.length)].name
     },
     getRandomYelpDate: function() {
-      this.randomYelpDate = this.yelpResponse[Math.floor(Math.random()*this.yelpResponse.length)].name
+      this.randomYelpDate = this.yelpResponse[Math.floor(Math.random()*this.yelpResponse.length)];
+      this.randomYelpDateImage = this.randomYelpDate.image_url;
     }
   },
   mounted () {
@@ -61,7 +71,8 @@ export default {
       .getEvents()
         .then(response => {
           this.yelpResponse = response.data.businesses;
-          this.randomYelpDate = this.yelpResponse[0].name;
+          this.randomYelpDate = this.yelpResponse[0];
+          this.randomYelpDateImage =  this.yelpResponse[0].image_url;
         })
   }
 }

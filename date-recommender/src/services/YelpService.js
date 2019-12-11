@@ -1,8 +1,29 @@
 import axios from 'axios'
+import YelpHelper from './../helpers/YelpHelpers'
+
+const corsPrefix = 'https://cors-anywhere.herokuapp.com';
+const baseUrl = 'https://api.yelp.com/v3';
+const requestHeader = {
+    headers: {
+        'Authorization': `Bearer ${process.env.VUE_APP_YELP_API_KEY}`
+    }
+};
 
 export default {
     getEvents() {
-        return axios
-                .get(`${'https://cors-anywhere.herokuapp.com/'}https://api.yelp.com/v3/businesses/search?limit=5&location=Winston Salem`, {headers: {'Authorization': `Bearer ${process.env.VUE_APP_YELP_API_KEY}`}});
+        var response = axios
+                .get(`${corsPrefix}/${baseUrl}/businesses/search?limit=5&location=Winston Salem`, requestHeader);
+    
+        return response;
     }
 };
+
+/*
+    "name"
+    "image_url"
+    "rating"
+    "price"
+    "display_address"
+
+
+*/
