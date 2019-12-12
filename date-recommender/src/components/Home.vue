@@ -27,7 +27,9 @@
               {{randomYelpDate.price}}
             </b-card>
             <b-card>
-              <!-- <span v-for="i in randomYelpDate.rating" :key="i"> &#11088;</span> -->
+              <div v-for="i in randomYelpDate.categories" :key="i">
+                {{i.title}}
+              </div>
             </b-card>
             <b-card>
               {{randomYelpDate}}

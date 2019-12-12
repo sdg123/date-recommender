@@ -24,6 +24,5 @@ export default {
     "rating"
     "price"
     "display_address"
-
-
+    "categories" ["title"]
 */
