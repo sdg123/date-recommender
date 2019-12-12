@@ -22,6 +22,16 @@
           </b-col>
           <b-col cols="6">
             <b-card>
+              {{randomYelpDate.name}}
+              <img :src="randomYelpDateImage" height="80px" width="80px" />
+              {{randomYelpDate.price}}
+            </b-card>
+            <b-card>
+              <div v-for="i in randomYelpDate.categories" :key="i">
+                {{i.title}}
+              </div>
+            </b-card>
+            <b-card>
               {{randomYelpDate}}
             </b-card>
           </b-col>
@@ -31,37 +41,41 @@
 </template>
 
 <script>
-import axios from 'axios'
+import TrelloService from './../services/TrelloService'
+import YelpService from './../services/YelpService'
 export default {
   name: 'HelloWorld',
   props: {
     trelloResponse: Array,
     randomTrelloDate: Object,
     yelpResponse: Array,
-    randomYelpDate: Object
+    randomYelpDate: Object,
+    randomYelpDateImage: Object
   },
   methods: {
     getRandomTrelloDate: function() {
       this.randomTrelloDate = this.trelloResponse[Math.floor(Math.random()*this.trelloResponse.length)].name
     },
     getRandomYelpDate: function() {
-      this.randomYelpDate = this.yelpResponse[Math.floor(Math.random()*this.yelpResponse.length)].name
+      this.randomYelpDate = this.yelpResponse[Math.floor(Math.random()*this.yelpResponse.length)];
+      this.randomYelpDateImage = this.randomYelpDate.image_url;
     }
   },
   mounted () {
-  axios
-    .get(`https://api.trello.com/1/boards/fDjwsM96/cards/?limit=10&fields=name&key=${process.env.VUE_APP_TRELLO_API_KEY}&token=${process.env.VUE_APP_TRELLO_TOKEN}`)
-    .then(response => {
-      this.trelloResponse = response.data;
-      this.randomTrelloDate = response.data[0].name;
-    })
+    TrelloService
+      .getCards()
+        .then(response => {
+          this.trelloResponse = response.data;
+          this.randomTrelloDate = response.data[0].name;
+        })
 
-    axios
-    .get(`${'https://cors-anywhere.herokuapp.com/'}https://api.yelp.com/v3/businesses/search?limit=5&location=Winston Salem`, {headers: {'Authorization': `Bearer ${process.env.VUE_APP_YELP_API_KEY}`}})
-    .then(response => {
-      this.yelpResponse = response.data.businesses;
-      this.randomYelpDate = this.yelpResponse[0].name;
-    })
+    YelpService
+      .getEvents()
+        .then(response => {
+          this.yelpResponse = response.data.businesses;
+          this.randomYelpDate = this.yelpResponse[0];
+          this.randomYelpDateImage =  this.yelpResponse[0].image_url;
+        })
   }
 }
 </script>
