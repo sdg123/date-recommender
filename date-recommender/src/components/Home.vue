@@ -22,17 +22,20 @@
           </b-col>
           <b-col cols="6">
             <b-card>
-              {{randomYelpDate.name}}
-              <img :src="randomYelpDateImage" height="80px" width="80px" />
-              {{randomYelpDate.price}}
-            </b-card>
-            <b-card>
+              <div class="name">
+                {{randomYelpDate.name}}
+              </div>
+              <div>
+                <img :src="randomYelpDateImage" height="80px" width="80px" />
+              </div>
+              <div>{{randomYelpDate.price}}</div>
+              <div>{{randomYelpDate.rating}}</div>
               <div v-for="i in randomYelpDate.categories" :key="i">
                 {{i.title}}
               </div>
-            </b-card>
-            <b-card>
-              {{randomYelpDate}}
+              <div v-for="i in randomYelpDate.location.display_address" :key="i">
+                  {{i}}
+              </div>
             </b-card>
           </b-col>
         </b-row>
@@ -95,5 +98,8 @@ li {
 }
 a {
   color: #42b983;
+}
+.name {
+  font-size: 2em;
 }
 </style>
