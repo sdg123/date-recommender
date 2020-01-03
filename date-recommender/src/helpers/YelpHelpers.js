@@ -1,15 +1,16 @@
 export default {
     getTextDescriptionOfDollarSigns(dollarSigns) {
+        var approxString = "Approx";
         switch(dollarSigns)
         {
             case "$":
-                return "Cheap";
+                return `${approxString} $10`;
             case "$$":
-                return "Reasonable";
+                return `${approxString} $11 to $30`;
             case "$$$":
-                return "Expensive";
+                return `${approxString} $31 to $60`;
             case "$$$$":
-                return "Really Expensive";
+                return `Above $60`;
         }
     }
 };

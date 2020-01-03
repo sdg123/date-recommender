@@ -22,17 +22,21 @@
           </b-col>
           <b-col cols="6">
             <b-card>
-              {{randomYelpDate.name}}
-              <img :src="randomYelpDateImage" height="80px" width="80px" />
-              {{randomYelpDate.price}}
-            </b-card>
-            <b-card>
-              <div v-for="i in randomYelpDate.categories" :key="i">
-                {{i.title}}
+              <div class="name">
+                {{randomYelpDate.name}}
               </div>
-            </b-card>
-            <b-card>
-              {{randomYelpDate}}
+              <div>
+                <img :src="randomYelpDateImage" height="80px" width="80px" />
+              </div>
+              <div>{{randomYelpDatePrice}}</div>
+              <div>{{randomYelpDate.rating}}</div>
+              <!-- <div v-for="i in randomYelpDate.categories" :key="i"> -->
+              <div>
+                <b-badge class="badge" v-for="i in randomYelpDate.categories" :key="i">{{i.title}}</b-badge>
+              </div>
+              <div v-for="i in randomYelpDate.location.display_address" :key="i">
+                  {{i}}
+              </div>
             </b-card>
           </b-col>
         </b-row>
@@ -43,6 +47,8 @@
 <script>
 import TrelloService from './../services/TrelloService'
 import YelpService from './../services/YelpService'
+import YelpHelper from './../helpers/YelpHelpers'
+
 export default {
   name: 'HelloWorld',
   props: {
@@ -50,7 +56,8 @@ export default {
     randomTrelloDate: Object,
     yelpResponse: Array,
     randomYelpDate: Object,
-    randomYelpDateImage: Object
+    randomYelpDatePrice: Object,
+    randomYelpDateImage: Object,
   },
   methods: {
     getRandomTrelloDate: function() {
@@ -74,6 +81,7 @@ export default {
         .then(response => {
           this.yelpResponse = response.data.businesses;
           this.randomYelpDate = this.yelpResponse[0];
+          this.randomYelpDatePrice = YelpHelper.getTextDescriptionOfDollarSigns(this.randomYelpDate.price);
           this.randomYelpDateImage =  this.yelpResponse[0].image_url;
         })
   }
@@ -95,5 +103,11 @@ li {
 }
 a {
   color: #42b983;
+}
+.name {
+  font-size: 2em;
+}
+.badge {
+  margin-left: 5px;
 }
 </style>
