@@ -30,9 +30,10 @@
               </div>
               <div>{{randomYelpDatePrice}}</div>
               <div>{{randomYelpDate.rating}}</div>
-              <!-- <div v-for="i in randomYelpDate.categories" :key="i"> -->
               <div>
-                <b-badge class="badge" v-for="i in randomYelpDate.categories" :key="i">{{i.title}}</b-badge>
+                <b-badge class="badge" v-for="category in randomYelpDate.categories" :key="category">
+                  {{category.title}}
+                </b-badge>
               </div>
               <div v-for="i in randomYelpDate.location.display_address" :key="i">
                   {{i}}
