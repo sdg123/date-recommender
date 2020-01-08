@@ -1,6 +1,6 @@
 <template>
   <b-container>
-      <div class="hello">
+      <div>
         <b-row>
           <b-col>
             <h1>Date Recommender</h1>
@@ -9,65 +9,33 @@
         <b-row>
           <b-col>
             <b-button v-on:click="getRandomTrelloDate()" pill variant="outline-primary" class="mb-2">Existing planned date idea</b-button>
-          </b-col>
-          <b-col>
-            <b-button v-on:click="getRandomYelpDate()" pill variant="outline-secondary" class="mb-2">Hungry</b-button>
-          </b-col>
-        </b-row>
-        <b-row>
-          <b-col cols="6">
             <b-card>
               {{randomTrelloDate}}
             </b-card>
           </b-col>
-          <b-col cols="6">
-            <b-card>
-              <div class="name">
-                {{randomYelpDate.name}}
-              </div>
-              <div>
-                <img :src="randomYelpDateImage" height="80px" width="80px" />
-              </div>
-              <div>{{randomYelpDatePrice}}</div>
-              <div>{{randomYelpDate.rating}}</div>
-              <div>
-                <b-badge class="badge" v-for="category in randomYelpDate.categories" :key="category">
-                  {{category.title}}
-                </b-badge>
-              </div>
-              <div v-for="i in randomYelpDate.location.display_address" :key="i">
-                  {{i}}
-              </div>
-            </b-card>
-          </b-col>
         </b-row>
+        <Yelp />
       </div>
   </b-container>
 </template>
 
 <script>
 import TrelloService from './../services/TrelloService'
-import YelpService from './../services/YelpService'
-import YelpHelper from './../helpers/YelpHelpers'
+import Yelp from './../components/Yelp.vue'
 
 export default {
   name: 'HelloWorld',
   props: {
     trelloResponse: Array,
-    randomTrelloDate: Object,
-    yelpResponse: Array,
-    randomYelpDate: Object,
-    randomYelpDatePrice: Object,
-    randomYelpDateImage: Object,
+    randomTrelloDate: Object
   },
   methods: {
     getRandomTrelloDate: function() {
       this.randomTrelloDate = this.trelloResponse[Math.floor(Math.random()*this.trelloResponse.length)].name
-    },
-    getRandomYelpDate: function() {
-      this.randomYelpDate = this.yelpResponse[Math.floor(Math.random()*this.yelpResponse.length)];
-      this.randomYelpDateImage = this.randomYelpDate.image_url;
     }
+  },
+  components: {
+    Yelp
   },
   mounted () {
     TrelloService
@@ -75,15 +43,6 @@ export default {
         .then(response => {
           this.trelloResponse = response.data;
           this.randomTrelloDate = response.data[0].name;
-        })
-
-    YelpService
-      .getEvents()
-        .then(response => {
-          this.yelpResponse = response.data.businesses;
-          this.randomYelpDate = this.yelpResponse[0];
-          this.randomYelpDatePrice = YelpHelper.getTextDescriptionOfDollarSigns(this.randomYelpDate.price);
-          this.randomYelpDateImage =  this.yelpResponse[0].image_url;
         })
   }
 }
@@ -108,7 +67,5 @@ a {
 .name {
   font-size: 2em;
 }
-.badge {
-  margin-left: 5px;
-}
+
 </style>

@@ -1,5 +1,4 @@
 import axios from 'axios'
-import YelpHelper from './../helpers/YelpHelpers'
 
 const corsPrefix = 'https://cors-anywhere.herokuapp.com';
 const baseUrl = 'https://api.yelp.com/v3';
