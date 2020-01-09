@@ -3,27 +3,25 @@
       <b-row>
           <b-col>
           <b-button v-on:click="getRandomYelpDate()" pill variant="outline-secondary" class="mb-2">Hungry</b-button>
-          <b-card>
-            <div class="name">
-              {{randomYelpDate.name}}
-            </div>
-            <div>
-              <img :src="randomYelpDateImage" height="80px" width="80px" />
-            </div>
-            <div>{{randomYelpDatePrice}}</div>
-            <div>{{randomYelpDate.rating}}</div>
-            <div>
-              <b-badge class="badge" v-for="category in randomYelpDate.categories" :key="category">
-                {{category.title}}
-              </b-badge>
-            </div>
-            <div v-for="i in randomYelpDate.location.display_address" :key="i">
-                {{i}}
-            </div>
-            <div>
-              It will take {{timeToDestination}} minutes to drive there.
-            </div>
-          </b-card>
+          <div class="name">
+            {{randomYelpDate.name}}
+          </div>
+          <div>
+            <img :src="randomYelpDateImage" height="80px" width="80px" />
+          </div>
+          <div>{{randomYelpDatePrice}}</div>
+          <div>{{randomYelpDate.rating}}</div>
+          <div>
+            <b-badge class="badge" v-for="category in randomYelpDate.categories" :key="category">
+              {{category.title}}
+            </b-badge>
+          </div>
+          <div v-for="i in randomYelpDate.location.display_address" :key="i">
+              {{i}}
+          </div>
+          <div>
+            It will take {{timeToDestination}} minutes to drive there.
+          </div>
         </b-col>
       </b-row>
   </b-container>
@@ -44,12 +42,11 @@ export default {
         var toAddress = encodeURIComponent(this.randomYelpDate.location.display_address[0]);
         navigator.geolocation.getCurrentPosition(function(pos){
           var fromAddress = encodeURIComponent(`${pos.coords.latitude},${pos.coords.longitude}`);
-
           MapQuestService.getRoute(fromAddress, toAddress)
             .then(p => {
               var timeInMinutes = p.data.route.time / 60;
               self.timeToDestination = Math.floor(timeInMinutes);
-            })
+            });
         });
       }
     },

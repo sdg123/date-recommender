@@ -2,11 +2,9 @@
     <b-container>
         <b-row>
             <b-col>
-                <b-card>
-                    <div v-if="temperature">
-                        <h3>{{temperature}} &deg;F</h3> 
-                    </div>
-                </b-card>
+                <div v-if="temperature">
+                    <h3>{{temperature}} &deg;F</h3> 
+                </div>
             </b-col>
         </b-row>
     </b-container>    
