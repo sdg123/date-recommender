@@ -16,12 +16,3 @@ export default {
         return response;
     }
 };
-
-/*
-    "name"
-    "image_url"
-    "rating"
-    "price"
-    "display_address"
-    "categories" ["title"]
-*/
