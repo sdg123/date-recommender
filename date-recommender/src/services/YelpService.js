@@ -11,7 +11,7 @@ const requestHeader = {
 export default {
     getEvents() {
         var response = axios
-                .get(`${corsPrefix}/${baseUrl}/businesses/search?limit=10&location=Winston Salem`, requestHeader);
+                .get(`${corsPrefix}/${baseUrl}/businesses/search?limit=10&location=Irving`, requestHeader);
     
         return response;
     }
