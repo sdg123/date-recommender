@@ -8,6 +8,7 @@
         </b-row>
         <Trello />
         <Yelp />
+        <Weather />
       </div>
   </b-container>
 </template>
@@ -15,11 +16,13 @@
 <script>
 import Yelp from './../components/Yelp.vue'
 import Trello from './../components/Trello.vue'
+import Weather from './../components/Weather.vue'
 export default {
   name: 'HelloWorld',
   components: {
     Trello,
-    Yelp
+    Yelp,
+    Weather
   }
 }
 </script>

@@ -37,8 +37,20 @@ import MapQuestService from './../services/MapQuestService'
 export default {
     methods: {
       getRandomYelpDate: function() {
+        var self = this;
         this.randomYelpDate = this.yelpResponse[Math.floor(Math.random()*this.yelpResponse.length)];
         this.randomYelpDateImage = this.randomYelpDate.image_url;
+        this.randomYelpDatePrice = YelpHelper.getTextDescriptionOfDollarSigns(this.randomYelpDate.price);
+        var toAddress = encodeURIComponent(this.randomYelpDate.location.display_address[0]);
+        navigator.geolocation.getCurrentPosition(function(pos){
+          var fromAddress = encodeURIComponent(`${pos.coords.latitude},${pos.coords.longitude}`);
+
+          MapQuestService.getRoute(fromAddress, toAddress)
+            .then(p => {
+              var timeInMinutes = p.data.route.time / 60;
+              self.timeToDestination = Math.floor(timeInMinutes);
+            })
+        });
       }
     },
     props: {
