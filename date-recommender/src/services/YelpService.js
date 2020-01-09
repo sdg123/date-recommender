@@ -1,5 +1,4 @@
 import axios from 'axios'
-import YelpHelper from './../helpers/YelpHelpers'
 
 const corsPrefix = 'https://cors-anywhere.herokuapp.com';
 const baseUrl = 'https://api.yelp.com/v3';
@@ -12,7 +11,7 @@ const requestHeader = {
 export default {
     getEvents() {
         var response = axios
-                .get(`${corsPrefix}/${baseUrl}/businesses/search?limit=10&location=Winston Salem`, requestHeader);
+                .get(`${corsPrefix}/${baseUrl}/businesses/search?limit=10&location=Irving`, requestHeader);
     
         return response;
     }

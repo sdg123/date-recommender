@@ -1,16 +1,13 @@
 export default {
     getTextDescriptionOfDollarSigns(dollarSigns) {
         var approxString = "Approx";
-        switch(dollarSigns)
-        {
-            case "$":
-                return `${approxString} $10`;
-            case "$$":
-                return `${approxString} $11 to $30`;
-            case "$$$":
-                return `${approxString} $31 to $60`;
-            case "$$$$":
-                return `Above $60`;
-        }
+        var dollarSignsToDescriptionsMap = {
+            "$":`${approxString} $10`,
+            "$$": `${approxString} $11 to $30`,
+            "$$$": `${approxString} $31 to $60`,
+            "$$$$": `Above $60`
+        };
+
+        return dollarSignsToDescriptionsMap[dollarSigns];
     }
 };
