@@ -3,7 +3,7 @@
         <b-row>
           <b-col>
             <div>
-                <b-button v-on:click="getRandomTrelloDate()" pill variant="outline-primary" class="mb-2">Existing planned date idea</b-button>
+                <b-button v-on:click="getRandomTrelloDate()" pill variant="outline-primary" class="mb-2">Already planned date idea</b-button>
             </div>
             <div>
                 {{randomTrelloDate}}

@@ -7,9 +7,9 @@
           </b-col>
         </b-row>
         <b-card>
+          <Weather />
           <Trello />
           <Yelp />
-          <Weather />
         </b-card>
       </div>
   </b-container>
