@@ -2,7 +2,7 @@
   <b-container>
       <b-row>
           <b-col>
-          <b-button v-on:click="getRandomYelpDate()" pill variant="outline-secondary" class="mb-2">Hungry</b-button>
+          <b-button v-on:click="getRandomYelpDate()" pill variant="outline-secondary" class="mb-2">Restaurants Near You</b-button>
           <div class="name">
             {{randomYelpDate.name}}
           </div>
@@ -17,7 +17,7 @@
             </b-badge>
           </div>
           <div v-for="i in randomYelpDate.location.display_address" :key="i">
-              {{i}}
+            {{i}}
           </div>
           <div v-if="timeToDestination">
             It will take <span class="time"><strong>{{timeToDestination}}</strong></span> to drive there.
@@ -51,13 +51,16 @@ export default {
       }
     },
     props: {
-        yelpResponse: Array,
-        randomYelpDate: Object,
-        randomYelpDatePrice: Object,
-        randomYelpDateImage: Object,
-        timeToDestination: Object
+      yelpResponse: Array,
+      randomYelpDate: Object,
+      randomYelpDatePrice: Object,
+      randomYelpDateImage: Object,
+      timeToDestination: Object
     },
     mounted() {
+
+      // var date = new Date();
+      // console.log(date.getHours());
 
       navigator.geolocation.getCurrentPosition(pos => {
         var fromAddress = encodeURIComponent(`${pos.coords.latitude},${pos.coords.longitude}`);

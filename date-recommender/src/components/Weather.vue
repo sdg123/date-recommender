@@ -1,11 +1,11 @@
 <template>
     <b-container>
         <b-row>
-            <b-col cols="9">
+            <b-col cols="6">
             </b-col>
-            <b-col cols="3">
+            <b-col cols="6">
                 <div v-if="temperature">
-                    <h3>{{temperature}} &deg;F</h3> 
+                    <h3>What it's like outside: {{temperature}} &deg;F</h3> 
                 </div>
             </b-col>
         </b-row>
