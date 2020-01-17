@@ -1,29 +1,29 @@
 <template>
   <b-container>
-      <b-row>
-          <b-col>
-          <b-button v-on:click="getRandomYelpDate()" pill variant="outline-secondary" class="mb-2">Restaurants Near You</b-button>
-          <div class="name">
-            {{randomYelpDate.name}}
-          </div>
-          <div>
-            <img :src="randomYelpDateImage" height="80px" width="80px" />
-          </div>
-          <div>{{randomYelpDatePrice}}</div>
-          <div>{{randomYelpDate.rating}} stars</div>
-          <div>
-            <b-badge class="badge" v-for="category in randomYelpDate.categories" :key="category">
-              {{category.title}}
-            </b-badge>
-          </div>
-          <div v-for="i in randomYelpDate.location.display_address" :key="i">
-            {{i}}
-          </div>
-          <div v-if="timeToDestination">
-            It will take <span class="time"><strong>{{timeToDestination}}</strong></span> to drive there.
-          </div>
-        </b-col>
-      </b-row>
+    <b-row>
+      <b-col>
+        <b-button v-on:click="getRandomYelpDate()" pill variant="outline-secondary" class="mb-2">Restaurants Near You</b-button>
+        <div class="name">
+          {{randomYelpDate.name}}
+        </div>
+        <div>
+          <img :src="randomYelpDateImage" height="80px" width="80px" />
+        </div>
+        <div>{{randomYelpDatePrice}}</div>
+        <div>{{randomYelpDate.rating}} stars</div>
+        <div>
+          <b-badge class="badge" v-for="category in randomYelpDate.categories" :key="category">
+            {{category.title}}
+          </b-badge>
+        </div>
+        <div v-for="i in randomYelpDate.location.display_address" :key="i">
+          {{i}}
+        </div>
+        <div v-if="timeToDestination">
+          It will take <span class="time"><strong>{{timeToDestination}}</strong></span> to drive there.
+        </div>
+      </b-col>
+    </b-row>
   </b-container>
 </template>
 
@@ -46,7 +46,7 @@ export default {
           MapQuestService.getRoute(fromAddress, toAddress)
             .then(p => {
               self.timeToDestination = MapQuestHelper.getTimeDescription(p.data.route.time);
-            }, function(error) {}, {maximumAge: 0});
+            }, function(error) {}, {enableHighAccuracy: true, maximumAge: 0});
         });
       }
     },
