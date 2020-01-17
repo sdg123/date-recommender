@@ -9,19 +9,8 @@ const requestHeader = {
 };
 
 export default {
-    getEvents() {
-        var response = axios
-                .get(`${corsPrefix}/${baseUrl}/businesses/search?limit=10&location=Irving`, requestHeader);
-    
-        return response;
+    getEvents(lat, lon) {
+        return axios
+                .get(`${corsPrefix}/${baseUrl}/businesses/search?limit=10&latitude=${lat}&longitude=${lon}`, requestHeader);
     }
 };
-
-/*
-    "name"
-    "image_url"
-    "rating"
-    "price"
-    "display_address"
-    "categories" ["title"]
-*/

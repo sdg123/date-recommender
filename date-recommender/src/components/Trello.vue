@@ -2,10 +2,12 @@
     <b-container>
         <b-row>
           <b-col>
-            <b-button v-on:click="getRandomTrelloDate()" pill variant="outline-primary" class="mb-2">Existing planned date idea</b-button>
-            <b-card>
-              {{randomTrelloDate}}
-            </b-card>
+            <div>
+                <b-button v-on:click="getRandomTrelloDate()" pill variant="outline-primary" class="mb-2">Already planned date idea</b-button>
+            </div>
+            <div>
+                {{randomTrelloDate}}
+            </div>
           </b-col>
         </b-row>
     </b-container>
@@ -28,8 +30,8 @@ export default {
         TrelloService
             .getCards()
                 .then(response => {
-                this.trelloResponse = response.data;
-                this.randomTrelloDate = response.data[0].name;
+                    this.trelloResponse = response.data;
+                    this.randomTrelloDate = response.data[0].name;
                 })
     }
 }

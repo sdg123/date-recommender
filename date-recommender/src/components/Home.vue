@@ -6,9 +6,11 @@
             <h1>Date Recommender</h1>
           </b-col>
         </b-row>
-        <Trello />
-        <Yelp />
-        <Weather />
+        <b-card>
+          <Weather />
+          <Trello />
+          <Yelp />
+        </b-card>
       </div>
   </b-container>
 </template>
