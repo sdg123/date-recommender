@@ -3,8 +3,8 @@
         <b-row>
             <b-col>
                 <div v-if="weather">
-                    <h3>What it's like outside: {{weather.temperature}} &deg;F</h3> 
-                    {{weather.description}}
+                    <h4>It's {{weather.temperature}} &deg;F outside</h4> 
+                    <h4>{{weather.description}}</h4>
                 </div>
             </b-col>
         </b-row>
