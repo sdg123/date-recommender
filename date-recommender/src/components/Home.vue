@@ -6,6 +6,9 @@
             <h1>Date Recommender</h1>
           </b-col>
         </b-row>
+        <!-- <b-row>
+          <b-button v-on:click="planmydate()" pill variant="outline-primary" class="mb-4">Plan my Date &hearts;</b-button>
+        </b-row> -->
         <b-row>
           <b-col>
             <b-button v-on:click="getSelection(1)" pill variant="outline-primary" class="mb-2">What's the weather like?</b-button>
@@ -50,6 +53,9 @@ export default {
   methods: {
     getSelection: function(option) {
       this.selection = option;
+    },
+    planmydate: function() {
+
     }
   },
   mounted() {

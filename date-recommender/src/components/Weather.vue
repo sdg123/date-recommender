@@ -5,6 +5,7 @@
                 <div v-if="weather">
                     <h4>It's {{weather.temperature}} &deg;F outside</h4> 
                     <h4>{{weather.description}}</h4>
+                    <h4>{{weather.isInclementWeather}}</h4>
                 </div>
             </b-col>
         </b-row>
@@ -25,9 +26,13 @@ export default {
             WeatherService
                 .getWeather(pos.coords.latitude, pos.coords.longitude)
                 .then(response => {
+                    var weatherDescription = WeatherHelper.getWeatherDescription(response.data.weather[0].description);
+                    var temperature = WeatherHelper.getTemperatureInFahrenheit(response.data.main.temp);
+
                     this.weather = {
-                        temperature: WeatherHelper.getTemperatureInFahrenheit(response.data.main.temp),
-                        description: WeatherHelper.getWeatherDescription(response.data.weather[0].description)
+                        temperature: temperature,
+                        description: weatherDescription,
+                        isInclementWeather: WeatherHelper.isInclementWeather(temperature, weatherDescription)
                     };
                 });
         });
