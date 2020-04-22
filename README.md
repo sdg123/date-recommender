@@ -14,10 +14,11 @@ VUE_APP_MAPQUEST_API_KEY=<YOUR_MAPQUEST_API_KEY>
 VUE_APP_OPENWEATHERMAP_API_KEY=<YOUR_OPENWEATHERMAP_API_KEY>
 ```
 3. Install Node.js and npm
+4. Install Vue CLI - https://cli.vuejs.org/guide/installation.html
+
 ### Usage
 
 1. Clone the repo.
-2. Make sure you have Vue CLI installed.
-3. Navigate inside date-recommender folder.
-4. Run `npm install`
-5. Run `npm run serve`
+2. Navigate inside date-recommender folder.
+3. Run `npm install`
+4. Run `npm run serve`
